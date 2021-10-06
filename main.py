@@ -31,6 +31,11 @@ def test_get_largest_prime_below():
     assert get_largest_prime_below(2) == 'nu am gasit un numar adecvat'
 
 
+'''
+    functia determina numarul de zile pe care le a trait un om fata de data curenta
+'''
+
+
 def get_age_in_days(birthday: date) -> int:
     return (date.today() - birthday).days.real
 
@@ -40,13 +45,38 @@ def test_get_age_in_days():
     assert get_age_in_days(15/4/2004) == 6378
 
 
+'''
+    functia get_goldbach returneaza prin intermediul a 2 parametrii p1,p2 minimul respectiv maximul (numere prime)
+    a caror suma este argumentul (numar natural strict mai mare decat 0) functiei 
+'''
+
+
+def get_goldbach(n) -> (int, int):
+    if n <= 0:
+        return "nu exista un astfel de numar"
+    for a in range(2, n+1, 1):
+        if is_prime(a) is True:
+            p1 = a
+            if is_prime(n - p1) is True:
+                p2 = n - a
+                return p1,p2
+    return "nu exista un astfel de numar"
+
+
+def test_get_goldbach(n):
+    assert get_goldbach(5) == 2,3
+    assert get_goldbach(7) == 2,5
+    assert get_goldbach(8) == 3,5
+
+
 def main():
      indice = True
      while indice is True:
-            print(""""
+            print("""
             apasa 1 pentru prima problema
             apasa 2 pentru a doua problema
-            apasa 3 pentru a iesi     
+            apasa 3 pentru a treia problema     
+            apasa 4 pentru a iesi
                  """"")
             index = input("alege optiune ")
             if index == '1':
@@ -58,6 +88,9 @@ def main():
                 birthday = date(int(v[2]), int(v[1]), int(v[0]))
                 print(get_age_in_days(birthday))
             elif index == '3':
+                x = int(input('numarul ales este', ))
+                print(get_goldbach(x))
+            elif index == '4':
                 break
             else:
                 print("Nu ai ales o optiune buna")
